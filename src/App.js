@@ -3,10 +3,10 @@ import React, { useState } from "react";
 
 function App() {
   const [detail, setDetail] = useState({
-    fname: " qwert",
-    lname: "yuio",
-    email: "yh@kk.vom",
-    phone: 4545,
+    fname: "",
+    lname: "",
+    email: "",
+    phone: "",
   });
 
   const HandleChange = (event) => {
@@ -25,11 +25,15 @@ function App() {
     setDetail((prevdata) => {
       return {
         ...prevdata,
-        [name]: value,
+        [name]: value, // this name should be same as name provided in input
+        // and initial value of useState() else new name will be added to object
       };
     });
   };
-  const Placeitems = () => {};
+  const onSubmits = (event) => {
+    console.log("subbmitted");
+    event.preventDefault();
+  };
 
   return (
     <>
@@ -37,7 +41,7 @@ function App() {
         <div className="maindiv">
           <h1>
             Enter your details
-            {detail.fname} {detail.lname}
+            {detail.fname} {detail.lname} {detail.email} {detail.phone}
           </h1>
           <div className="formdiv">
             <input
@@ -63,11 +67,14 @@ function App() {
             ></input>
             <input
               type="number"
-              name="number"
+              name="phone"
               placeholder="Enter phone no"
               onChange={HandleChange}
             ></input>
-            <button onClick={Placeitems}> Submit</button>
+            <button onClick={onSubmits} type="submit">
+              {" "}
+              Submit
+            </button>
           </div>
         </div>
       </form>
